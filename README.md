@@ -45,12 +45,19 @@
 -   install dependencies using [Poetry](https://python-poetry.org "python package manager")
 
     ```bash
+    poetry lock
     poetry install
     ```
 
 -   start the necessary services (at least the database and redis)
 
 -   configure environment variables in `.env` file
+
+-   generate locales
+
+    ```bash
+    pybabel compile -d bot/locales 
+    ```
 
 -   start telegram bot
 
