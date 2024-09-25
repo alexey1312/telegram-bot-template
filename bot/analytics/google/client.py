@@ -1,4 +1,8 @@
+from __future__ import annotations
+
+import orjson
 from aiohttp import ClientSession
+from aiohttp.client_exceptions import ClientConnectorError, ClientResponseError
 from loguru import logger
 
 from bot.analytics.types import AbstractAnalyticsLogger, BaseEvent
@@ -16,17 +20,28 @@ class GoogleAnalyticsTelegramLogger(AbstractAnalyticsLogger):
     async def _send_request(
         self,
         event: BaseEvent,
-    ) -> dict:
-        url = f"{self._base_url}/mp/collect?measurement_id={self._measurement_id}&api_secret={self._api_secret}"
-        params = dict(event)
+    ) -> None:
+        """Implementation of interaction with Amplitude API."""
+        data = {"api_key": self._api_token, "events": [event.to_dict()]}
 
-        async with ClientSession() as session, session.post(url, headers=self._headers, json=params) as response:
-            json_response = await response.json(content_type="application/json")
+        async with ClientSession() as session:
+            try:
+                async with session.post(
+                    self._base_url,
+                    headers=self._headers,
+                    data=orjson.dumps(data),
+                    timeout=self._timeout,
+                ) as response:
+                    json_response = await response.json(content_type="application/json")
+                    self._validate_response(json_response)
+            except ClientConnectorError as e:
+                logger.error(f"Failed to connect to Amplitude: {e}")
+                return
+            except ClientResponseError as e:
+                logger.error(f"Failed to send request to Amplitude: {e}")
+                return
 
-        logger.info("Send record to Google Analytics")
-        logger.info(f"{json_response=}")
-
-        return self._validate_response(json_response)
+        self._validate_response(json_response)
 
     @staticmethod
     def _validate_response(response: dict) -> dict:
