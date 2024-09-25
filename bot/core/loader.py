@@ -24,12 +24,13 @@ redis_client = Redis(
     ),
 )
 
-storage = RedisStorage(
-    redis=redis_client,
-    key_builder=DefaultKeyBuilder(with_bot_id=True),
-)
+# storage = RedisStorage(
+#     redis=redis_client,
+#     key_builder=DefaultKeyBuilder(with_bot_id=True),
+# )
 
-dp = Dispatcher(storage=storage)
+# TODO(user): Turn on the storage
+dp = Dispatcher()
 
 i18n: I18n = I18n(path=LOCALES_DIR, default_locale=DEFAULT_LOCALE, domain=I18N_DOMAIN)
 
