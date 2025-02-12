@@ -820,13 +820,13 @@ Flask = "*"
 
 [[package]]
 name = "flask-security-too"
-version = "5.5.2"
+version = "5.6.0"
 description = "Quickly add security features to your Flask application."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "flask_security_too-5.5.2-py3-none-any.whl", hash = "sha256:393fb9b5c03ebc14f8c3500af4691c881ba34599a74ccbc8a2b2dc4f51071585"},
-    {file = "flask_security_too-5.5.2.tar.gz", hash = "sha256:c697289fee71efb16223ee4d2632e113c311840fe32fe51e38f7a02ddc8637c3"},
+    {file = "flask_security_too-5.6.0-py3-none-any.whl", hash = "sha256:dc70147bc34964f0c965b03c2762feef7bf57375d1584a0d3b9ada7c98366d22"},
+    {file = "flask_security_too-5.6.0.tar.gz", hash = "sha256:8da51fcb7393e3fe6f931af84ed4c90c7c08bbfe99a19080cb4b7343e76d80b2"},
 ]
 
 [package.dependencies]
@@ -2589,4 +2589,4 @@ propcache = ">=0.2.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "c9c43b6b9326bda849725a226440d45da45e242ba61bddbbcfc545539abe2b95"
+content-hash = "66139b929b7b716ec516909ca0ac857d3156a9883da670de8b053cb3fd2e3341"
