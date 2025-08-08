@@ -27,7 +27,7 @@ cachetools = "^6.1.0"
 orjson = "^3.11.1"
 alembic = "^1.16.4"
 prometheus-client = "^0.22.1"
-greenlet = "^3.2.3"
+greenlet = "^3.2.4"
 
 [tool.poetry.group.admin.dependencies]
 gunicorn = "^23.0.0"
